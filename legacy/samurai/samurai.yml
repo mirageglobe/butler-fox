@@ -1,0 +1,23 @@
+---
+## samurai
+
+scroll:
+  name: "default"
+  desc: "basic default script for updating machine"
+  tasklist:
+    task:
+      name: "print time"
+      desc: "echos out current system time"
+      pid: ""
+      cmd:
+        - "echo 'hello'"
+        - "echo 'another'"
+
+    task:
+      name: "print name"
+      desc: ""
+      pid: null
+      cmd:
+        - "echo 'jimmy'"
+        - "echo 'hello'"
+...
