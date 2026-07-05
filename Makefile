@@ -2,7 +2,7 @@
 
 IMAGE := butler-fox-sandbox
 
-.PHONY: help menu build image test sandbox deploy
+.PHONY: help menu build image test test-swissknife sandbox deploy
 
 help:
 	@printf "\n  \033[33mbutler-fox\033[0m\n"
@@ -25,6 +25,9 @@ test: ## lint and test in sandbox container
 		bats -r test/* && \
 		bash install.sh && \
 		~/.fox/bin/fox help"
+
+test-swissknife: ## lint and test the swissknife sub-project (delegates to its own Makefile)
+	cd sub-projects/swissknife && $(MAKE) all
 
 sandbox: ## interactive container with fox hot-reloaded from src/
 	docker run --rm -it \

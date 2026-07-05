@@ -16,6 +16,12 @@ butler-fox began as **samurai** — a Python-based system helper script (`samura
 
 the current bash implementation (`fox.sh`) is the third iteration of that idea. the Go reimplementation (`fox-go/`) is underway as a fourth, targeting binary distribution without a bash dependency.
 
+### sub-projects
+
+`sub-projects/` holds active, independently maintained tool collections that live in this repo but keep their own build, tests, and standalone-run property; this is distinct from `legacy/`, which holds retired/abandoned code kept only as historical reference.
+
+- `sub-projects/swissknife/`: migrated from the standalone `swissknife` github repo (now archived as `zip-swissknife`); a bag of independent `jsk-*` scripts (media conversion, system checks, small dev utilities) with its own Makefile, bats/pytest tests, and SPEC.md. run standalone via `cd sub-projects/swissknife && make test`, or via the root `make test-swissknife`. see the roadmap's `ideas` section for which tools are candidates to graduate into native `fox` commands.
+
 ### design inspiration
 
 the user's personal `dot.fox.bashrc` — an 8,500-line, 139-function bash reference library sourced into the shell daily — defines what this tool should aspire to be. that file is a personal scratchpad: powerful but unshareable, untested, and hard to maintain.
@@ -379,6 +385,19 @@ scan `fox.sh` for unsafe patterns beyond what shellcheck covers — guards again
 ---
 
 ### ideas
+
+**from `sub-projects/swissknife` migration** (see `sub-projects/swissknife/SPEC.md` for the source tools)
+
+- `[fox-sh]` `fox doctor`: check dev tool deps (ffmpeg, imagemagick, mysql, etc.) are installed; from `jsk-doctor.sh`
+- `[fox-sh]` `fox jwt`: decode JWT tokens; from `jsk-jwt.sh`
+- `[fox-sh]` `fox env`: diff `.env` against `.env.example`; from `jsk-env.sh`
+- `[fox-sh]` `fox color`: ANSI color chart reference; from `jsk-color.sh`
+- `[fox-sh]` `fox convert <mp3|mp4|png|pdf>`: media conversion wrappers; from `jsk-mp3.sh`/`jsk-mp4.sh`/`jsk-png.sh`/`jsk-pdf.sh`
+- `[fox-sh]` `fox rename`: normalize filenames to lowercase/hyphens; from `jsk-filename-fixer.sh`
+- `[fox-sh]` `fox watch`: interval command runner; from `jsk-watch.sh`
+- `[fox-sh]` extend existing `fox_git` with a `meta` subcommand: cache git file metadata; from `jsk-git-cache-meta.sh`
+- `[fox-sh]` extend existing `fox_network` with a `port <n>` subcommand: port-to-process lookup; from `jsk-port.sh`
+- note: `jsk-system-check.py` overlaps with existing `fox_system`, not worth porting; `jsk-swapfile.sh`, `jsk-configuration-manager.sh`, `jsk-check-sftp.sh` conflict with fox's own non-goals (remote orchestration, config management) and stay sub-project-only
 
 - `[fox-sh]` `fox python` — uv, venv, pip notes
 - `[fox-sh]` `fox node` — nvm, install, notes
