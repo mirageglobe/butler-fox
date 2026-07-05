@@ -1,0 +1,43 @@
+name: "Lint and Test"
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  shellcheck:
+    name: ShellCheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@2.0.0
+        with:
+          version: v0.10.0
+          scandir: '.'
+          ignore_paths: '.git'
+
+  bats:
+    name: Bats Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup Bats
+        uses: bats-core/bats-action@4.0.0
+      - name: Run Bats tests
+        run: bats *.bats
+
+  python:
+    name: Python Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run Python tests
+        run: python3 jsk-system-check-test.py
+

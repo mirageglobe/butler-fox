@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# ====================================================== project information ===
+
+# author      : jimmy mg lim (mirageglobe@gmail.com)
+# source      : https://github.com/mirageglobe/swissknife
+# license     : Apache License 2.0
+# purpose     : Lists available swissknife (jsk) tools and their descriptions.
+# version     : 0.1.0
+
+# --------------------------------------------------------------------- main ---
+
+# Detect where the script is located (resolving symlinks)
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do 
+  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" 
+done
+SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+
+SEARCH_DIR="$SCRIPT_DIR"
+
+echo -e "\n\033[1m=== Swissknife Tools Help ===\033[0m"
+echo -e "Scanning: $SEARCH_DIR\n"
+
+printf "\033[36m%-30s\033[0m %s\n" "Tool" "Description"
+printf "%s\n" "--------------------------------------------------------------------------------"
+
+# Find all jsk-* files (scripts and binaries)
+for file in "$SEARCH_DIR"/jsk-*; do
+    # Skip if no match found or if it's a directory
+    [ -f "$file" ] || continue
+    
+    filename=$(basename "$file")
+    
+    # Extract purpose
+    purpose=$(grep "^# purpose" "$file" | head -n 1 | sed -E 's/^# purpose[[:space:]]*:[[:space:]]*//')
+    
+    if [ -z "$purpose" ]; then
+        purpose="(No description found)"
+    fi
+    
+    printf "\033[32m%-30s\033[0m %s\n" "$filename" "$purpose"
+done
+
+echo ""
+echo -e "Usage: Type \033[36m<Tool>\033[0m to run any of the commands above."
