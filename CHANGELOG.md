@@ -7,6 +7,20 @@ versioning: [semantic versioning](https://semver.org/spec/v2.0.0.html)
 
 ---
 
+## [Unreleased]
+
+### added
+
+- `sub-projects/swissknife/`: swissknife migrated in as a standalone sub-project (own Makefile, bats/pytest tests, SPEC.md), matching the `legacy/` precedent but for an active project; runs unchanged via `cd sub-projects/swissknife && make test`
+- `make test-swissknife`: root target delegating to the swissknife sub-project's own test suite
+- SPEC.md roadmap ideas for 9 swissknife tools that are clean fits to graduate into native fox commands (`fox doctor`, `fox jwt`, `fox env`, `fox color`, `fox convert`, `fox rename`, `fox watch`, plus new subcommands on `fox_git` and `fox_network`); tools that overlap with `fox_system` or conflict with fox's own stated non-goals (remote orchestration, config management) are flagged as staying in swissknife
+
+### fixed
+
+- stray `nsk-` prefixed asset filename renamed to match the `jsk-` convention
+
+---
+
 ## [1.0.0] - 2026-05-10
 
 ### added
