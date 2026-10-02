@@ -2,7 +2,7 @@
   "name": "clamshield",
   "main": "main.js",
   "devDependencies": {
-    "electron": "^39.8.10",
+    "electron": "^41.10.6",
     "electron-packager": "^15.4.0"
   },
   "version": "1.0.1",
