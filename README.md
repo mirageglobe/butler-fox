@@ -96,3 +96,7 @@ before submitting a PR:
 make test         # lint (shellcheck) + bats test suite — must pass
 make all          # build → test → deploy
 ```
+
+---
+
+[buy me a coffee](https://buymeacoffee.com/mirageglobe)
