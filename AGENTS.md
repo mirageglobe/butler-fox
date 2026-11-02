@@ -23,7 +23,7 @@ see [SPEC.md](SPEC.md) for architecture, component breakdown, and roadmap.
 | `Dockerfile` | sandbox image with curl, bats, shellcheck pre-installed |
 | `Makefile` | build/test targets; `make test` is the canonical test command |
 | `install.sh` | one-liner bootstrap script for end users |
-| `legacy/` | archived subprojects — do not modify or import |
+| `legacy/` | one-file tombstones for retired subprojects (what it was, how to rebuild); the code is at tag `legacy-snapshot-20261102` |
 
 ---
 
@@ -32,7 +32,7 @@ see [SPEC.md](SPEC.md) for architecture, component breakdown, and roadmap.
 | do not | do instead |
 | :--- | :--- |
 | add runtime dependencies to `fox.sh` | keep the CLI dependency-free (curl, grep, bash only) |
-| modify anything in `legacy/` | treat as read-only historical archive |
+| re-add retired code under `legacy/` | restore it elsewhere from the tag (`git checkout legacy-snapshot-20261102 -- legacy/<name>`) or rebuild from the tombstone; `legacy/` holds `.md` files only |
 | write tests that bypass the `fox.sh` public interface | test via `fox.sh <command>` invocations only |
 | run `make test` on the host | always test inside the sandbox (`make test` uses docker) |
 | commit to `main` or `master` | branch using `YYYYMMDD-adjective-noun` format |

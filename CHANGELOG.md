@@ -15,6 +15,10 @@ versioning: [semantic versioning](https://semver.org/spec/v2.0.0.html)
 - `make test-swissknife`: root target delegating to the swissknife sub-project's own test suite
 - SPEC.md roadmap ideas for 9 swissknife tools that are clean fits to graduate into native fox commands (`fox doctor`, `fox jwt`, `fox env`, `fox color`, `fox convert`, `fox rename`, `fox watch`, plus new subcommands on `fox_git` and `fox_network`); tools that overlap with `fox_system` or conflict with fox's own stated non-goals (remote orchestration, config management) are flagged as staying in swissknife
 
+### removed
+
+- the six `legacy/` subprojects (clamshield, clamshield-cli, fox-go, graph-docker, hound-docker, samurai) are replaced by one-file tombstones, `legacy/<name>.md`, each describing what it was well enough to rebuild; the code is kept at tag `legacy-snapshot-20261102`. this also clears the dependabot alerts on `legacy/clamshield/yarn.lock`
+
 ### fixed
 
 - stray `nsk-` prefixed asset filename renamed to match the `jsk-` convention
