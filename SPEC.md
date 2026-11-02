@@ -14,7 +14,7 @@ the target environment is **local machines** (macOS and debian/ubuntu). this kee
 
 butler-fox began as **samurai** — a Python-based system helper script (`samurai.py`) for macOS and linux. the python dependency proved too heavy for minimal server environments, so it was rewritten in bash and renamed **fox** to reflect the lighter, faster character of the tool. the legacy samurai scripts are preserved in `src/samurai/` as read-only historical reference.
 
-the current bash implementation (`fox.sh`) is the third iteration of that idea. the Go reimplementation (`fox-go/`) is underway as a fourth, targeting binary distribution without a bash dependency.
+the current bash implementation (`fox.sh`) is the third iteration of that idea. the Go reimplementation (`legacy/fox-go.md`) was started as a fourth and is deferred, targeting binary distribution without a bash dependency.
 
 ### sub-projects
 
@@ -153,13 +153,13 @@ butler-fox/
 ├── dist/
 │   ├── fox-latest.sh          # built artefact (copied from fox.sh by make deploy)
 │   └── .fox.bash              # built artefact (copied from src by make deploy)
-├── legacy/                    # archived subprojects — do not modify
-│   ├── clamshield/            # electron GUI for ClamAV
-│   ├── clamshield-cli/        # standalone bash scripts for ClamAV ops
-│   ├── fox-go/                # Go reimplementation scaffold (deferred)
-│   ├── graph-docker/          # debian graph container
-│   ├── hound-docker/          # alpine ClamAV container
-│   └── samurai/               # original python/bash predecessor
+├── legacy/                    # one-file tombstones for retired subprojects (code at tag legacy-snapshot-20261102)
+│   ├── clamshield.md          # electron tray app skeleton for ClamAV
+│   ├── clamshield-cli.md      # ClamAV bash scripts and the chunked-scan design
+│   ├── fox-go.md              # Go/cobra scaffold (deferred)
+│   ├── graph-docker.md        # debian graph-easy container
+│   ├── hound-docker.md        # alpine sandbox placeholder
+│   └── samurai.md             # original menu runner (bash, python, yaml)
 ├── Dockerfile                 # sandbox image: curl, bats, shellcheck
 ├── install.sh                 # one-liner bootstrap for end users
 └── Makefile
@@ -362,7 +362,7 @@ make sandbox  # interactive shell with fox hot-reloaded from src/
 | `notes`       | reference + local notes              | linux    |
 
 - [ ] `[fox-sh]` implement `fox_security` — ufw, clamav, fail2ban, chkrootkit, rkhunter, notes  [medium]
-- note: `legacy/clamshield-cli/` contains reference scan patterns (exclude dirs, max-filesize, freshclam flow) to draw from for clamav notes content
+- note: `legacy/clamshield-cli.md` records the reference scan patterns (exclude dirs, max-filesize, freshclam flow) to draw from for clamav notes content
 
 **script safety scanning**
 
